@@ -1,75 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css"> 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet"/>
     <title>OrbiTec Agriculture</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        button {
+            margin-top: 15px;
+        }
+        img {
+            max-width: 200px;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-    <div class="row">
-      <center><a>Bienvenido Agricultor</a><hr class="linea col-10" size=5 color= "#AFABAA"></hr></center>
-    </div>
-
-    <div class="container-fluid d-flex justify-content-center align-items-center">
-        <div class="row">
-            <div class="hola col-md-12 mb-5 mt-3"> 
-                <img class="logo" src="/ips.jpg" class="logotipo" alt="logo">
-            </div>
-            <div class="row">
-                <!-- Input de nombre -->
-                <div class="inputContainer">
-                    <input type="text" class="input" placeholder="a">
-                    <label for="" class="label">Nombre</label>
-                </div>
-
-                <!-- Selección de región con ID -->
-                <div class="inputContainer">
-                    <select class="form-select input" id="regionSelect" aria-label="Seleccione su región">
-                        <option selected value="null">Seleccione su región</option>
-                        <option value="Cañada">Cañada</option>
-                        <option value="Costa">Costa</option>
-                        <option value="Istmo">Istmo</option>
-                        <option value="Mixteca">Mixteca</option>
-                        <option value="Papaloapan">Papaloapan</option>
-                        <option value="Sierra Norte">Sierra Norte</option>
-                        <option value="Sierra Sur">Sierra Sur</option>
-                        <option value="Valles Centrales">Valles Centrales</option>
-                    </select>
-                    <label for="" class="label">Ubicación</label>
-                </div>
-
-                <style>
-                    .btn-personalizado { 
-                        background-color: #008F18;
-                        color: #fff;
-                    }
-                </style>
-
-                <!-- Botón Comenzar -->
-                <a class="inicio btn btn-personalizado mb-3 me-3 ms-3" href="#" role="button" id="comenzarBtn">Comenzar</a>
-            </div>
+    <div id="app" class="container">
+        <h1>OrbiTec</h1>
+        <div id="step-1">
+            <p>Hola, ¡bienvenido agricultor!</p>
+            <img src="logo.png" alt="Logo de OrbiTec"> <!-- Insertar el logo aquí -->
+            <p>Favor de ingresar datos de su Ubicación:</p>
+            <select id="ubicacion" required>
+                <option value="">Seleccione su ubicación</option>
+                <option value="cañada">Cañada</option>
+                <option value="costa">Costa</option>
+                <option value="istmo">Istmo</option>
+                <option value="mixteca">Mixteca</option>
+                <option value="papaloapan">Papaloapan</option>
+                <option value="sierra sur">Sierra Sur</option>
+                <option value="sierra norte">Sierra Norte</option>
+                <option value="valles centrales">Valles Centrales</option>
+            </select><br>
+            <button onclick="goToStep(2)">Continuar</button>
         </div>
-    </div>   
 
+        <div id="step-2" style="display:none;">
+            <p>¿Qué tipo de información desea saber de su zona?</p>
+            <button onclick="setSelectedOption('humedad')">Humedad del suelo</button>
+            <button onclick="setSelectedOption('precipitaciones')">Precipitaciones</button>
+            <button onclick="setSelectedOption('inundacion')">Peligro de inundación</button>
+            <button onclick="setSelectedOption('sequía')">Peligro de sequía</button>
+        </div>
+
+        <div id="step-3" style="display:none;">
+            <p>¿Qué tipo de información desea saber?</p>
+            <button onclick="setSelectedType('actuales')">Datos actuales</button>
+            <button onclick="setSelectedType('predictivos')">Datos predictivos</button>
+        </div>
+
+        <div id="step-4" style="display:none;">
+            <p>Mostrando la información seleccionada...</p>
+            <img id="infoImage" src="" alt="Información de la zona"> <!-- Insertar imagen según la opción seleccionada -->
+            <button onclick="goToStep(5)">Continuar</button>
+        </div>
+
+        <div id="step-5" style="display:none;">
+            <p>¿Está satisfech@ con la información proporcionada?</p>
+            <button onclick="goToStep(2)">No, me gustaría seguir explorando información de mi zona</button>
+            <button onclick="finish()">Sí, finalizar búsqueda</button>
+        </div>
+    </div>
+    
     <script>
-        // Cambiar el href del botón según la región seleccionada
-        document.getElementById('comenzarBtn').addEventListener('click', function(event) {
-            var region = document.getElementById('regionSelect').value;
-            
-            if (region === "null") {
-                alert("Por favor, seleccione una región.");
-                event.preventDefault(); // Evitar que el enlace funcione si no se selecciona una región
-            } else {
-                // Redirigir a la página con el parámetro de la región
-                var nuevaUrl = 'Imginteractiva.html?region=' + encodeURIComponent(region);
-                document.getElementById('comenzarBtn').setAttribute('href', nuevaUrl);
+        function goToStep(stepNumber) {
+            document.querySelectorAll('.container > div').forEach(div => div.style.display = 'none');
+            document.querySelector(`#step-${stepNumber}`).style.display = 'block';
+        }
+
+        function setSelectedOption(option) {
+            goToStep(3);
+        }
+
+        function setSelectedType(type) {
+            // Aquí se podría definir la lógica para mostrar la imagen según la opción seleccionada
+            let imageSrc = '';
+            if (type === 'actuales') {
+                imageSrc = 'datos_actuales.png';
+            } else if (type === 'predictivos') {
+                imageSrc = 'datos_predictivos.png';
             }
-        });
+            document.getElementById('infoImage').src = imageSrc;
+            goToStep(4);
+        }
+
+        function finish() {
+            document.querySelector('#app').innerHTML = '<h2>Gracias por utilizar OrbiTec Agriculture</h2>';
+        }
     </script>
 </body>
 </html>
