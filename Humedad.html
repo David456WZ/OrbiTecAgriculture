@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="imginteractiva.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Humedad</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="container-fluid text-center">
+    <div class="arriba">
+        <h1 class="titulo">Humedad - <span id="region-title"></span></h1>
+    </div>
+
+    <div class="d-flex flex-column align-items-center justify-content-center vh-100">
+        <a id="datos-actuales-link" href="#" class="btn btn-primary mb-3" style="width: 200px;">Datos Actuales</a>
+        <a id="pronosticos-link" href="#" class="btn btn-primary mb-3" style="width: 200px;">Pronósticos</a>
+    </div>
+
+    <script>
+        // Obtener la región seleccionada desde localStorage (puedes cambiar a URL Params si usas esa opción)
+        var regionSeleccionada = localStorage.getItem("regionSeleccionada");
+        document.getElementById("region-title").innerText = regionSeleccionada;
+
+        // Aquí puedes adaptar las URL dinámicamente según la región
+        var regionSlug = getRegionSlug(regionSeleccionada);
+
+        // Configurar los enlaces de Datos Actuales y Pronósticos para la región
+        document.getElementById("datos-actuales-link").href = 'datos/humedad_' + regionSlug + '_actuales.html';
+        document.getElementById("pronosticos-link").href = 'datos/humedad_' + regionSlug + '_pronosticos.html';
+
+        // Función para mapear las regiones a slugs o IDs
+        function getRegionSlug(region) {
+            switch (region) {
+                case "Cañada": return "region1";
+                case "Costa": return "region2";
+                case "Istmo": return "region3";
+                case "Mixteca": return "region4";
+                case "Papaloapan": return "region5";
+                case "Sierra Norte": return "region6";
+                case "Sierra Sur": return "region7";
+                case "Valles Centrales": return "region8";
+                default: return "";
+            }
+        }
+    </script>
+</body>
+</html>
