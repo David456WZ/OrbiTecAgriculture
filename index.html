@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+o<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -35,41 +35,41 @@
     <div id="app" class="container">
         <h1>OrbiTec</h1>
         <div id="step-1">
-            <p>Hola, ¡bienvenido agricultor!</p>
+            <p>Hello, ¡Welcome farmer!</p>
             <img src="ips.jpg" alt="Logo de OrbiTec"> 
-            <p>Favor de ingresar datos de su Ubicación:</p>
+            <p>Please enter your location information:</p>
             <select id="ubicacion" required>
-                <option value="">Seleccione su ubicación</option>
+                <option value="">Select your location</option>
                 <option value="cañada">Cañada</option>
                 <option value="costa">Costa</option>
                 <option value="istmo">Istmo</option>
                 <option value="mixteca">Mixteca</option>
                 <option value="papaloapan">Papaloapan</option>
-                <option value="sierra sur">Sierra Sur</option>
-                <option value="sierra norte">Sierra Norte</option>
-                <option value="valles centrales">Valles Centrales</option>
+                <option value="sierra sur">Southern Sierra</option>
+                <option value="sierra norte">Northern Sierra</option>
+                <option value="valles centrales">Central Valleys</option>
             </select><br>
-            <button onclick="goToStep(2)">Continuar</button>
+            <button onclick="goToStep(2)">Continue</button>
         </div>
 
         <div id="step-2" style="display:none;">
-            <p>¿Qué tipo de información desea saber de su zona?</p>
-            <button onclick="setSelectedOption('humedad')">Humedad del suelo</button>
-            <button onclick="setSelectedOption('precipitaciones')">Precipitaciones</button>
-            <button onclick="setSelectedOption('inundacion')">Peligro de inundación</button>
-            <button onclick="setSelectedOption('sequía')">Peligro de sequía</button>
+            <p>What kind of information would you like to know about your area?</p>
+            <button onclick="setSelectedOption('humedad')">Soil moisture</button>
+            <button onclick="setSelectedOption('precipitaciones')">Precipitation</button>
+            <button onclick="setSelectedOption('inundacion')">Flood hazard</button>
+            <button onclick="setSelectedOption('sequía')">Danger of drought</button>
         </div>
 
         <div id="step-3" style="display:none;">
-            <p>¿Qué tipo de información desea saber?</p>
-            <button onclick="setSelectedType('actuales')">Datos actuales</button>
-            <button onclick="setSelectedType('predictivos')">Datos predictivos</button>
+            <p>What kind of information do you want to know?</p>
+            <button onclick="setSelectedType('actuales')">Current data</button>
+            <button onclick="setSelectedType('predictivos')">Predictive data</button>
         </div>
 
         <div id="step-4" style="display:none;">
-            <p>Mostrando la información seleccionada...</p>
-            <img id="infoImage" src="" alt="Información de la zona"> 
-            <button onclick="goToStep(5)">Continuar</button>
+            <p>Showing selected information...</p>
+            <img id="infoImage" src="" alt="Area information"> 
+            <button onclick="goToStep(5)">Continue</button>
         </div>
 
         <div id="step-5" style="display:none;">
