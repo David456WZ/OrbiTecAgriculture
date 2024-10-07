@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,14 +35,14 @@
     <div id="app" class="container">
         <h1>OrbiTec</h1>
         <div id="step-1">
-            <p>Hello, welcome farmer!</p>
-            <img src="ips.jpg" alt="OrbiTec Logo"> <!-- Insert the logo here -->
-            <p>Please enter your location data:</p>
+            <p>Hello, ¡Welcome farmer!</p>
+            <img src="ips.jpg" alt="Logo de OrbiTec"> 
+            <p>Please enter your location information:</p>
             <select id="ubicacion" required>
                 <option value="">Select your location</option>
                 <option value="cañada">Cañada</option>
-                <option value="costa">Coast</option>
-                <option value="istmo">Isthmus</option>
+                <option value="costa">Costa</option>
+                <option value="istmo">Istmo</option>
                 <option value="mixteca">Mixteca</option>
                 <option value="papaloapan">Papaloapan</option>
                 <option value="sierra sur">Southern Sierra</option>
@@ -53,36 +53,36 @@
         </div>
 
         <div id="step-2" style="display:none;">
-            <p>What type of information would you like to know about your area?</p>
+            <p>What kind of information would you like to know about your area?</p>
             <button onclick="setSelectedOption('humedad')">Soil moisture</button>
             <button onclick="setSelectedOption('precipitaciones')">Precipitation</button>
-            <button onclick="setSelectedOption('inundacion')">Flood risk</button>
-            <button onclick="setSelectedOption('sequía')">Drought risk</button>
+            <button onclick="setSelectedOption('inundacion')">Flood hazard</button>
+            <button onclick="setSelectedOption('sequía')">Danger of drought</button>
         </div>
 
         <div id="step-3" style="display:none;">
-            <p>What type of information would you like to know?</p>
-            <button onclick="setSelectedType('actuales')">Current data</button>
-            <button onclick="setSelectedType('predictivos')">Predictive data</button>
+            <p>What kind of information do you want to know?</p>
+            <button onclick="goToStep(4)">Current data</button>
+            <button onclick="goToStep(4)">Predictive data</button>
         </div>
 
         <div id="step-4" style="display:none;">
-            <p>Showing the selected information...</p>
-            <img id="infoImage" src="" alt="Information about the area"> <!-- Insert image according to the selected option -->
+            <p>Showing selected information...</p>
+            <a href="https://worldview.earthdata.nasa.gov/?v=-100.99455081098914,14.841093027301252,-91.85805270539525,19.352238966938234&z=1&l=Reference_Labels_15m,Reference_Features_15m,Coastlines_15m,IMERG_Precipitation_Rate,AIRS_L2_Surface_Relative_Humidity_Day,NDH_Drought_Hazard_Frequency_Distribution_1980-2000,NDH_Flood_Hazard_Frequency_Distribution_1985-2003&lg=true&t=2024-10-06-T17%3A09%3A16Z ">Click here to view the information.</a>
             <button onclick="goToStep(5)">Continue</button>
         </div>
 
         <div id="step-5" style="display:none;">
             <p>Are you satisfied with the information provided?</p>
             <button onclick="goToStep(2)">No, I would like to continue exploring information about my area</button>
-            <button onclick="finish()">Yes, finish search</button>
+            <button onclick="finish()">Yes, end search</button>
         </div>
     </div>
     
     <script>
         function goToStep(stepNumber) {
             document.querySelectorAll('.container > div').forEach(div => div.style.display = 'none');
-            document.querySelector(#step-${stepNumber}).style.display = 'block';
+            document.querySelector(`#step-${stepNumber}`).style.display = 'block';
         }
 
         function setSelectedOption(option) {
@@ -90,7 +90,7 @@
         }
 
         function setSelectedType(type) {
-            // Here you could define the logic to show the image based on the selected option
+            
             let imageSrc = '';
             if (type === 'actuales') {
                 imageSrc = 'datos_actuales.png';
